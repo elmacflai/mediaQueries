@@ -18,15 +18,18 @@ nav {
   justify-content: space-between;
   align-items: center;
   color: white;
+  flex-direction: row;
+  list-style-type: none;
 }
 .nav-links {
-  display: flex;
+  display:flex;
   width: 50%;
   justify-content: space-between;
   
 }
 .nav-links li {
   list-style-type: none;
+  overflow: hidden;
 }
 
 .logo {
@@ -67,13 +70,13 @@ nav {
   display: none;
 }
 
-
 /*mobile styles*/
 @media screen and (max-width: 700px) {
 
   header {
-    background-color: blue;
+    background-color: black;
   }
+   
   .nav-links{
     position: absolute;
     top: 0;
@@ -84,4 +87,69 @@ nav {
     justify-content: center;
     align-items: center;
   }
+  #menu-toggle ~ .nav-links li {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  #menu-toggle:checked ~ .nav-links li {
+    border: 1px solid #333;
+    height: 2.5em;
+    padding: 0.5em;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .nav-links > li {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0.5em 0;
+    width: 100%;
+    color: white;
+    background-color: #222;
+  }
+
+  
+  .nav-links > li:not(:last-child) {
+    border-bottom: 1px solid #444;
+  }
+  .menu-button,
+  .menu-button::before,
+  .menu-button::after {
+    display: block;
+    background-color: #fff;
+    position: absolute;
+    height: 4px;
+    width: 30px;
+    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 2px;
+  }
+  
+  .menu-button::before {
+    content: '';
+    margin-top: -8px;
+  }
+  
+  .menu-button::after {
+    content: '';
+    margin-top: 8px;
+  }
+  
+  #menu-toggle:checked + .menu-button-container .menu-button::before {
+    margin-top: 0px;
+    transform: rotate(405deg);
+  }
+  
+  #menu-toggle:checked + .menu-button-container .menu-button {
+    background: rgba(255, 255, 255, 0);
+  }
+  
+  #menu-toggle:checked + .menu-button-container .menu-button::after {
+    margin-top: 0px;
+    transform: rotate(-405deg);
+  }
+
 }
